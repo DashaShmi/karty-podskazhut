@@ -6,6 +6,12 @@
   --accent-font: STIX Two Text;
 }
 
+.theme_dark {
+  --bg-color: #171717;
+  --text-color: #b3b3b3;
+  --accent-color: transparent;
+}
+
 *,
 *::before,
 *::after {
@@ -32,6 +38,20 @@ figure {
   margin: 0;
 }
 
+a:focus,
+button:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid currentColor;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
 .heading {
   font-family: var(--accent-font, serif);
   text-align: center;
@@ -50,6 +70,52 @@ figure {
 .header__title {
   font-size: clamp(3.75rem, 2.5rem + 5.5556vw, 7.5rem);
   margin-block-end: 40px;
+}
+
+.header__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-block-start: 1px solid currentColor;
+  border-block-end: 1px solid currentColor;
+  padding-block: 20px;
+}
+
+.header__theme-toggler {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+}
+
+.header__theme-button {
+  position: relative;
+  border: none;
+  padding: 0;
+  color: currentColor;
+  font-family: inherit;
+  font-size: 18px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header__theme-button:active {
+  text-decoration: underline;
+}
+
+.header__theme-button_is-active {
+  font-weight: 700;
+}
+
+.header__theme-button_is-active::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inline-size: calc(100% - 8px);
+  block-size: 0.5ch;
+  background-color: var(--accent-color);
+  inset-block-end: 0.3ch;
+  inset-inline-start: -2px;
 }
 
 .content__title {
@@ -172,4 +238,32 @@ figure {
   block-size: 0.5ch;
   inset-block-end: 0.3ch;
   inset-inline-start: -4px;
+}
+
+.footer {
+  margin-block-start: 10%;
+  border-block-start: 1px solid currentColor;
+  padding: 2.5%;
+  text-align: center;
+}
+
+.footer__copyright {
+  font-size: 18px;
+}
+
+.theme_dark.colored-text::after {
+  background-image: url(../images/pattern.svg);
+}
+
+.theme_dark.header__theme-button_is-active::after {
+  background-image: url(../images/pattern.svg);
+}
+
+.theme_dark.content__text-block_type_first-lettered
+  .content__paragraph:first-of-type::first-letter {
+  border: 1px solid currentColor;
+}
+
+.theme_dark .content__list li::before {
+  background-image: url(../images/marker-dark.svg);
 }
